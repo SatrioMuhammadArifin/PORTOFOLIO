@@ -1,0 +1,1142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Raya Hair Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0D0D0D;
+    --cream: #F5F0E8;
+    --gold: #C9A96E;
+    --gold-light: #E8D9BE;
+    --white: #FFFFFF;
+    --gray-mid: #6B6B6B;
+    --gray-light: #E8E4DC;
+    --section-pad: clamp(64px, 10vw, 120px);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--ink);
+    color: var(--cream);
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px clamp(24px, 6vw, 80px);
+    background: rgba(13,13,13,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,169,110,0.15);
+  }
+
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--gold);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+
+  .logo span {
+    color: var(--cream);
+    font-weight: 400;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    opacity: 0.8;
+    transition: opacity 0.2s, color 0.2s;
+  }
+
+  .nav-links a:hover { opacity: 1; color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold);
+    color: var(--ink) !important;
+    padding: 10px 24px;
+    border-radius: 2px;
+    font-weight: 600 !important;
+    opacity: 1 !important;
+    font-size: 13px !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase;
+  }
+
+  .nav-cta:hover { background: var(--gold-light); color: var(--ink) !important; }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: var(--cream);
+    transition: all 0.3s;
+  }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 68px; left: 0; right: 0;
+    background: rgba(13,13,13,0.98);
+    padding: 24px;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 99;
+    border-bottom: 1px solid rgba(201,169,110,0.2);
+  }
+
+  .mobile-menu.open { display: flex; }
+
+  .mobile-menu a {
+    color: var(--cream);
+    text-decoration: none;
+    font-size: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    opacity: 0.85;
+  }
+
+  .mobile-menu a:last-child { border-bottom: none; }
+
+  /* ─── HERO ─── */
+  .hero {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 0 clamp(24px, 6vw, 80px) clamp(60px, 8vw, 100px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(13,13,13,0.3) 0%, rgba(13,13,13,0.75) 60%, var(--ink) 100%),
+      url('https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1600&q=80&auto=format') center/cover no-repeat;
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 700px; }
+
+  .hero-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 7vw, 88px);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--cream);
+    margin-bottom: 24px;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+
+  .hero-sub {
+    font-size: clamp(15px, 2vw, 18px);
+    font-weight: 300;
+    color: rgba(245,240,232,0.75);
+    max-width: 480px;
+    margin-bottom: 48px;
+    line-height: 1.8;
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--ink);
+    padding: 16px 36px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  .btn-ghost {
+    color: var(--cream);
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-ghost:hover { opacity: 1; }
+
+  .btn-ghost svg { transition: transform 0.2s; }
+  .btn-ghost:hover svg { transform: translateX(4px); }
+
+  /* ─── DIVIDER ─── */
+  .scissor-line {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    padding: 0 clamp(24px, 6vw, 80px);
+    margin: 0;
+  }
+
+  .scissor-line::before, .scissor-line::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.3;
+  }
+
+  .scissor-icon {
+    width: 32px;
+    height: 32px;
+    opacity: 0.5;
+    color: var(--gold);
+    flex-shrink: 0;
+    margin: 0 12px;
+  }
+
+  /* ─── SECTIONS ─── */
+  section { padding: var(--section-pad) clamp(24px, 6vw, 80px); }
+
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::after {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.5;
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 4vw, 52px);
+    font-weight: 600;
+    line-height: 1.2;
+    color: var(--cream);
+  }
+
+  /* ─── SERVICES ─── */
+  #layanan { background: var(--ink); }
+
+  .services-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+    margin-bottom: 64px;
+    flex-wrap: wrap;
+  }
+
+  .services-header p {
+    color: rgba(245,240,232,0.6);
+    max-width: 360px;
+    font-size: 15px;
+    line-height: 1.8;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px;
+    background: rgba(201,169,110,0.15);
+    border: 1px solid rgba(201,169,110,0.15);
+  }
+
+  .service-card {
+    background: var(--ink);
+    padding: 40px 36px;
+    transition: background 0.25s;
+    cursor: default;
+  }
+
+  .service-card:hover { background: rgba(201,169,110,0.06); }
+
+  .service-number {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    opacity: 0.5;
+    margin-bottom: 24px;
+  }
+
+  .service-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--cream);
+    margin-bottom: 12px;
+  }
+
+  .service-card p {
+    font-size: 14px;
+    color: rgba(245,240,232,0.55);
+    line-height: 1.8;
+    margin-bottom: 24px;
+  }
+
+  .service-price {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  /* ─── ABOUT ─── */
+  #tentang {
+    background: var(--cream);
+    color: var(--ink);
+  }
+
+  #tentang .section-label { color: #8B6B3A; }
+  #tentang .section-label::after { background: #8B6B3A; }
+  #tentang h2 { color: var(--ink); }
+
+  .about-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 8vw, 100px);
+    align-items: center;
+  }
+
+  .about-img-wrap {
+    position: relative;
+    aspect-ratio: 3/4;
+    max-height: 520px;
+  }
+
+  .about-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .about-img-accent {
+    position: absolute;
+    bottom: -20px;
+    right: -20px;
+    width: 60%;
+    height: 60%;
+    border: 2px solid var(--gold);
+    z-index: -1;
+  }
+
+  .about-text p {
+    color: rgba(13,13,13,0.65);
+    font-size: 15px;
+    line-height: 1.9;
+    margin-bottom: 20px;
+  }
+
+  .about-stats {
+    display: flex;
+    gap: 40px;
+    margin-top: 40px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(13,13,13,0.12);
+  }
+
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1;
+  }
+
+  .stat-num span { color: var(--gold); font-size: 24px; }
+
+  .stat-label {
+    font-size: 12px;
+    color: rgba(13,13,13,0.5);
+    margin-top: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ─── PROMO ─── */
+  .promo-strip {
+    background: var(--gold);
+    padding: 48px clamp(24px, 6vw, 80px);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .promo-strip h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 3vw, 40px);
+    color: var(--ink);
+    max-width: 500px;
+  }
+
+  .promo-strip h2 em { font-style: italic; }
+
+  .btn-dark {
+    background: var(--ink);
+    color: var(--gold);
+    padding: 16px 36px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    white-space: nowrap;
+    transition: opacity 0.2s;
+    flex-shrink: 0;
+  }
+
+  .btn-dark:hover { opacity: 0.85; }
+
+  /* ─── GALERI ─── */
+  #galeri { background: var(--ink); }
+
+  .gallery-header { margin-bottom: 48px; }
+
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 4px;
+  }
+
+  .gallery-grid .g1 { grid-column: 1; grid-row: 1 / 3; }
+  .gallery-grid .g2 { grid-column: 2; grid-row: 1; }
+  .gallery-grid .g3 { grid-column: 3; grid-row: 1; }
+  .gallery-grid .g4 { grid-column: 2 / 4; grid-row: 2; }
+
+  .gallery-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(20%);
+    transition: filter 0.3s, transform 0.3s;
+  }
+
+  .gallery-item {
+    overflow: hidden;
+    aspect-ratio: auto;
+    min-height: 200px;
+  }
+
+  .gallery-item:hover img { filter: grayscale(0%); transform: scale(1.03); }
+
+  /* ─── TESTIMONIALS ─── */
+  #ulasan {
+    background: rgba(201,169,110,0.05);
+    border-top: 1px solid rgba(201,169,110,0.1);
+    border-bottom: 1px solid rgba(201,169,110,0.1);
+  }
+
+  .testimonials-header { margin-bottom: 56px; }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .testimonial-card {
+    padding: 32px;
+    border: 1px solid rgba(201,169,110,0.18);
+    background: rgba(255,255,255,0.02);
+    position: relative;
+  }
+
+  .testimonial-card::before {
+    content: '"';
+    position: absolute;
+    top: 20px; right: 28px;
+    font-family: 'Playfair Display', serif;
+    font-size: 72px;
+    color: var(--gold);
+    opacity: 0.15;
+    line-height: 1;
+  }
+
+  .testimonial-stars {
+    display: flex;
+    gap: 3px;
+    margin-bottom: 16px;
+    color: var(--gold);
+    font-size: 14px;
+  }
+
+  .testimonial-text {
+    font-size: 14px;
+    color: rgba(245,240,232,0.7);
+    line-height: 1.9;
+    margin-bottom: 24px;
+    font-style: italic;
+  }
+
+  .testimonial-author {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--cream);
+  }
+
+  .testimonial-role {
+    font-size: 12px;
+    color: var(--gold);
+    opacity: 0.7;
+    margin-top: 3px;
+  }
+
+  /* ─── BOOKING ─── */
+  #booking { background: var(--ink); }
+
+  .booking-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 6vw, 80px);
+    align-items: start;
+  }
+
+  .booking-info p {
+    color: rgba(245,240,232,0.6);
+    font-size: 15px;
+    line-height: 1.9;
+    margin-bottom: 32px;
+  }
+
+  .contact-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+
+  .contact-list li {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 14px;
+    color: rgba(245,240,232,0.7);
+  }
+
+  .contact-icon {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(201,169,110,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    color: var(--gold);
+  }
+
+  .booking-form { display: flex; flex-direction: column; gap: 16px; }
+
+  .form-group { display: flex; flex-direction: column; gap: 8px; }
+
+  .form-group label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.5);
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,169,110,0.2);
+    color: var(--cream);
+    padding: 14px 18px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    border-radius: 0;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .form-group select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C9A96E' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+
+  .form-group select option { background: #1a1a1a; }
+
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: var(--gold);
+  }
+
+  .form-group textarea { resize: vertical; min-height: 100px; }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .btn-submit {
+    background: var(--gold);
+    color: var(--ink);
+    padding: 16px 36px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    margin-top: 8px;
+    transition: background 0.2s, transform 0.15s;
+    border-radius: 0;
+  }
+
+  .btn-submit:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: #080808;
+    padding: 60px clamp(24px, 6vw, 80px) 32px;
+    border-top: 1px solid rgba(201,169,110,0.1);
+  }
+
+  .footer-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 48px;
+    margin-bottom: 56px;
+    flex-wrap: wrap;
+  }
+
+  .footer-brand p {
+    color: rgba(245,240,232,0.45);
+    font-size: 14px;
+    max-width: 280px;
+    line-height: 1.8;
+    margin-top: 16px;
+  }
+
+  .footer-nav h4 {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+
+  .footer-nav ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .footer-nav a {
+    color: rgba(245,240,232,0.5);
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s, opacity 0.2s;
+  }
+  .footer-nav a:hover { color: var(--gold); }
+
+  .footer-socials {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .social-btn {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(201,169,110,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(245,240,232,0.5);
+    text-decoration: none;
+    font-size: 15px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .social-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+  .footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .footer-bottom p {
+    font-size: 12px;
+    color: rgba(245,240,232,0.3);
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .about-layout { grid-template-columns: 1fr; }
+    .about-img-wrap { max-height: 360px; }
+    .about-img-accent { display: none; }
+    .booking-layout { grid-template-columns: 1fr; }
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .gallery-grid .g1 { grid-column: 1; grid-row: 1; }
+    .gallery-grid .g2 { grid-column: 2; grid-row: 1; }
+    .gallery-grid .g3 { grid-column: 1; grid-row: 2; }
+    .gallery-grid .g4 { grid-column: 2; grid-row: 2; }
+    .about-stats { gap: 24px; }
+    .footer-top { flex-direction: column; gap: 32px; }
+    .promo-strip { justify-content: center; text-align: center; }
+    .form-row { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-grid .g1, .gallery-grid .g2,
+    .gallery-grid .g3, .gallery-grid .g4 {
+      grid-column: 1;
+      grid-row: auto;
+    }
+    h1 { font-size: 38px; }
+    .hero-actions { flex-direction: column; align-items: flex-start; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">Raya <span>Hair Studio</span></a>
+  <ul class="nav-links">
+    <li><a href="#layanan">Layanan</a></li>
+    <li><a href="#tentang">Tentang</a></li>
+    <li><a href="#galeri">Galeri</a></li>
+    <li><a href="#ulasan">Ulasan</a></li>
+    <li><a href="#booking" class="nav-cta">Booking Sekarang</a></li>
+  </ul>
+  <button class="hamburger" aria-label="Buka menu" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#layanan" onclick="toggleMenu()">Layanan</a>
+  <a href="#tentang" onclick="toggleMenu()">Tentang Kami</a>
+  <a href="#galeri" onclick="toggleMenu()">Galeri</a>
+  <a href="#ulasan" onclick="toggleMenu()">Ulasan</a>
+  <a href="#booking" onclick="toggleMenu()" style="color: var(--gold); font-weight: 600;">Booking Sekarang →</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Hair Studio Premium</div>
+    <h1>Rambut Indah,<br><em>Kepercayaan Diri</em><br>Tanpa Batas.</h1>
+    <p class="hero-sub">Kami hadir untuk merawat dan menata rambut Anda dengan sentuhan profesional yang hangat dan bersahabat — karena setiap helai rambut adalah bagian dari cerita Anda.</p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn-primary">Booking Sekarang</a>
+      <a href="#layanan" class="btn-ghost">
+        Lihat Layanan
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SCISSOR DIVIDER -->
+<div class="scissor-line">
+  <svg class="scissor-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+    <line x1="20" y1="4" x2="8.12" y2="15.88"/>
+    <line x1="14.47" y1="14.48" x2="20" y2="20"/>
+    <line x1="8.12" y1="8.12" x2="12" y2="12"/>
+  </svg>
+</div>
+
+<!-- LAYANAN -->
+<section id="layanan">
+  <div class="services-header">
+    <div>
+      <div class="section-label">Layanan Kami</div>
+      <h2>Semua yang<br>Rambut Anda Butuhkan</h2>
+    </div>
+    <p>Dari perawatan harian hingga transformasi total — kami siap membantu Anda tampil terbaik dengan harga yang ramah di kantong.</p>
+  </div>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-number">01</div>
+      <h3>Potong Rambut</h3>
+      <p>Potongan presisi yang disesuaikan dengan bentuk wajah dan gaya hidup Anda — dari basic cut hingga style kekinian.</p>
+      <div class="service-price">Mulai Rp 45.000</div>
+    </div>
+    <div class="service-card">
+      <div class="service-number">02</div>
+      <h3>Creambath & Spa</h3>
+      <p>Perawatan intensif untuk rambut kusam dan rusak. Nikmati relaksasi sambil menutrisi rambut Anda dari dalam.</p>
+      <div class="service-price">Mulai Rp 75.000</div>
+    </div>
+    <div class="service-card">
+      <div class="service-number">03</div>
+      <h3>Pewarnaan Rambut</h3>
+      <p>Warna natural, highlight, balayage, hingga bold color — dikerjakan dengan produk berkualitas tinggi yang ramah rambut.</p>
+      <div class="service-price">Mulai Rp 150.000</div>
+    </div>
+    <div class="service-card">
+      <div class="service-number">04</div>
+      <h3>Smoothing & Rebonding</h3>
+      <p>Rambut lurus sempurna yang tahan lama. Formulasi khusus untuk menjaga kesehatan rambut tetap terjaga.</p>
+      <div class="service-price">Mulai Rp 250.000</div>
+    </div>
+    <div class="service-card">
+      <div class="service-number">05</div>
+      <h3>Cuci & Blow Dry</h3>
+      <p>Segar dan rapi dalam waktu singkat. Cocok untuk Anda yang ingin tampil prima sebelum meeting atau acara penting.</p>
+      <div class="service-price">Mulai Rp 35.000</div>
+    </div>
+    <div class="service-card">
+      <div class="service-number">06</div>
+      <h3>Hair Mask Treatment</h3>
+      <p>Masker rambut premium berbahan alami untuk memulihkan kilau dan kelembutan rambut yang hilang akibat cuaca atau styling.</p>
+      <div class="service-price">Mulai Rp 90.000</div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="tentang">
+  <div class="about-layout">
+    <div class="about-img-wrap">
+      <img src="https://images.unsplash.com/photo-1596178060671-7a80dc8059ea?w=800&q=80&auto=format" alt="Stylist profesional sedang bekerja">
+      <div class="about-img-accent"></div>
+    </div>
+    <div class="about-text">
+      <div class="section-label">Tentang Kami</div>
+      <h2>Dibangun dengan Passion,<br>Dijalankan dengan Hati</h2>
+      <br>
+      <p>Raya Hair Studio lahir dari mimpi sederhana: menghadirkan layanan salon berkualitas tinggi yang tetap terjangkau untuk semua orang. Kami percaya penampilan yang baik bukan soal kemewahan — melainkan hak setiap orang.</p>
+      <p>Dengan tim stylist berpengalaman yang terus belajar mengikuti tren terkini, kami berkomitmen memberikan yang terbaik untuk setiap pelanggan yang datang ke studio kami.</p>
+      <div class="about-stats">
+        <div>
+          <div class="stat-num">500<span>+</span></div>
+          <div class="stat-label">Pelanggan Puas</div>
+        </div>
+        <div>
+          <div class="stat-num">3<span>th</span></div>
+          <div class="stat-label">Pengalaman</div>
+        </div>
+        <div>
+          <div class="stat-num">4.9<span>★</span></div>
+          <div class="stat-label">Rating Google</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROMO STRIP -->
+<div class="promo-strip">
+  <h2>Pelanggan baru? Dapatkan <em>diskon 20%</em> untuk kunjungan pertama Anda!</h2>
+  <a href="#booking" class="btn-dark">Klaim Promo →</a>
+</div>
+
+<!-- GALERI -->
+<section id="galeri">
+  <div class="gallery-header">
+    <div class="section-label">Karya Kami</div>
+    <h2>Setiap Gaya adalah<br>Sebuah Cerita</h2>
+  </div>
+  <div class="gallery-grid">
+    <div class="gallery-item g1">
+      <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=600&q=80&auto=format" alt="Penataan rambut">
+    </div>
+    <div class="gallery-item g2">
+      <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80&auto=format" alt="Pewarnaan rambut">
+    </div>
+    <div class="gallery-item g3">
+      <img src="https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?w=600&q=80&auto=format" alt="Smoothing rambut">
+    </div>
+    <div class="gallery-item g4">
+      <img src="https://images.unsplash.com/photo-1584515979956-d9f6e5d09982?w=1000&q=80&auto=format" alt="Interior salon">
+    </div>
+  </div>
+</section>
+
+<!-- ULASAN -->
+<section id="ulasan">
+  <div class="testimonials-header">
+    <div class="section-label">Kata Mereka</div>
+    <h2>Kepuasan Pelanggan<br>adalah Prioritas Kami</h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">Sudah 1 tahun langganan di sini dan tidak pernah kecewa. Mbak Raya sangat paham apa yang saya mau, hasilnya selalu rapi dan tahan lama. Recommended banget!</p>
+      <div class="testimonial-author">Anisa Putri</div>
+      <div class="testimonial-role">Pelanggan Setia</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">Pertama kali coba smoothing di sini dan hasilnya luar biasa! Rambut saya yang tadinya kusut jadi lurus sempurna. Harga juga sangat terjangkau untuk kualitas sebagus ini.</p>
+      <div class="testimonial-author">Dewi Rahayu</div>
+      <div class="testimonial-role">Pelanggan Baru</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="testimonial-stars">★★★★★</div>
+      <p class="testimonial-text">Creambath-nya bikin rileks banget! Kondisi rambut saya yang rusak karena sering di-cat jadi jauh lebih sehat setelah rutin treatment di sini. Tempatnya juga bersih dan nyaman.</p>
+      <div class="testimonial-author">Sari Wulandari</div>
+      <div class="testimonial-role">Pelanggan Rutin</div>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING -->
+<section id="booking">
+  <div class="booking-layout">
+    <div class="booking-info">
+      <div class="section-label">Hubungi Kami</div>
+      <h2>Reservasi<br>Mudah & Cepat</h2>
+      <br>
+      <p>Isi formulir di samping atau hubungi kami langsung melalui WhatsApp. Kami siap melayani Anda dengan senang hati!</p>
+      <ul class="contact-list">
+        <li>
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 8.81 19.79 19.79 0 01.37 2.18 2 2 0 012.37 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.91a16 16 0 006.72 6.72l.72-.72a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          </div>
+          <div>
+            <div style="font-weight: 500; color: var(--cream);">WhatsApp</div>
+            <div style="color: var(--gold); font-size: 13px;">+62 812-3456-7890</div>
+          </div>
+        </li>
+        <li>
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          </div>
+          <div>
+            <div style="font-weight: 500; color: var(--cream);">Lokasi</div>
+            <div style="color: rgba(245,240,232,0.55); font-size: 13px;">Jl. Contoh No. 123, Tangerang</div>
+          </div>
+        </li>
+        <li>
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div>
+            <div style="font-weight: 500; color: var(--cream);">Jam Operasional</div>
+            <div style="color: rgba(245,240,232,0.55); font-size: 13px;">Senin – Sabtu, 09.00 – 20.00</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="booking-form">
+      <div class="form-group">
+        <label>Nama Lengkap</label>
+        <input type="text" placeholder="Nama kamu">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Nomor WhatsApp</label>
+          <input type="tel" placeholder="08xx-xxxx-xxxx">
+        </div>
+        <div class="form-group">
+          <label>Tanggal Booking</label>
+          <input type="date">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Layanan yang Dipilih</label>
+        <select>
+          <option value="" disabled selected>Pilih layanan</option>
+          <option>Potong Rambut</option>
+          <option>Creambath & Spa</option>
+          <option>Pewarnaan Rambut</option>
+          <option>Smoothing & Rebonding</option>
+          <option>Cuci & Blow Dry</option>
+          <option>Hair Mask Treatment</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Catatan Tambahan (opsional)</label>
+        <textarea placeholder="Ceritakan keinginan kamu atau ada permintaan khusus..."></textarea>
+      </div>
+      <button class="btn-submit" onclick="handleBooking()">Kirim Reservasi</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="logo" style="font-size: 20px;">Raya <span>Hair Studio</span></a>
+      <p>Salon rambut profesional dengan pelayanan hangat dan harga bersahabat. Karena penampilan terbaik adalah hak semua orang.</p>
+      <div class="footer-socials">
+        <a href="#" class="social-btn" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+        </a>
+        <a href="#" class="social-btn" aria-label="TikTok">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 12a4 4 0 104 4V4a5 5 0 005 5"/></svg>
+        </a>
+        <a href="#" class="social-btn" aria-label="WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/><path d="M8 12s1 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-nav">
+      <h4>Navigasi</h4>
+      <ul>
+        <li><a href="#layanan">Layanan</a></li>
+        <li><a href="#tentang">Tentang Kami</a></li>
+        <li><a href="#galeri">Galeri</a></li>
+        <li><a href="#ulasan">Ulasan</a></li>
+        <li><a href="#booking">Booking</a></li>
+      </ul>
+    </div>
+    <div class="footer-nav">
+      <h4>Layanan</h4>
+      <ul>
+        <li><a href="#layanan">Potong Rambut</a></li>
+        <li><a href="#layanan">Creambath & Spa</a></li>
+        <li><a href="#layanan">Pewarnaan</a></li>
+        <li><a href="#layanan">Smoothing</a></li>
+        <li><a href="#layanan">Hair Mask</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2024 Raya Hair Studio. Semua hak dilindungi.</p>
+    <p>Dibuat dengan ❤️ untuk bisnis lokal Indonesia</p>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    menu.classList.toggle('open');
+  }
+
+  document.addEventListener('click', function(e) {
+    const menu = document.getElementById('mobileMenu');
+    const btn = document.querySelector('.hamburger');
+    if (!menu.contains(e.target) && !btn.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+
+  function handleBooking() {
+    const name = document.querySelector('input[type="text"]').value;
+    const phone = document.querySelector('input[type="tel"]').value;
+    const date = document.querySelector('input[type="date"]').value;
+    const service = document.querySelector('select').value;
+
+    if (!name || !phone || !date || !service) {
+      alert('Mohon lengkapi semua field yang diperlukan ya! 😊');
+      return;
+    }
+
+    const msg = `Halo Raya Hair Studio! 👋\n\nSaya ingin booking:\n• Nama: ${name}\n• Layanan: ${service}\n• Tanggal: ${new Date(date).toLocaleDateString('id-ID', {weekday:'long', year:'numeric', month:'long', day:'numeric'})}\n\nMohon konfirmasinya. Terima kasih! 🙏`;
+    const waUrl = `https://wa.me/6281234567890?text=${encodeURIComponent(msg)}`;
+    window.open(waUrl, '_blank');
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .testimonial-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
